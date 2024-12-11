@@ -2,11 +2,12 @@ import numpy as np
 import math
 import scipy
 import PartLib
+import Loads
 
 # Task 5.2 sizing primary structure for internal pressure.
 
 def hoopStress(cylinder):
-    cylinder.t = cylinder.p * cylinder.R / cylinder.SigmaY
+    cylinder.t =  Loads.p * cylinder.R / cylinder.SigmaY
 
 # Task 5.3 buckling
 
@@ -17,7 +18,7 @@ def eulerBuckling(cylinder):
     L = cylinder.h
 
     critical_euler_stress = ((math.pi ** 2) * E * I) / A * (L**2)
-    cylinder.critical_euler_stress = critical_euler_stress
+    return critical_euler_stress
 
 def bucklingK(cylinder):
     L = cylinder.h
@@ -50,4 +51,4 @@ def shellBuckling(cylinder):
     ratio1 = ((math.pi **2)*E)/(12*(1 - (Poisson**2)))
     ratio2 = (t/L)**2
     critical_shell_stress = coefficient * buckling_k * ratio1 * ratio2
-    cylinder.critical_shell_stress = critical_shell_stress
+    return critical_shell_stress
