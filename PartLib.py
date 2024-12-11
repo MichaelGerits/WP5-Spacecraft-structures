@@ -32,7 +32,7 @@ class StructuralCylinder:
         return area
 
     def calcMass(self):
-        mass = self.area * self.L
+        mass = self.area * self.h
         self.mass = mass
         return mass
 
