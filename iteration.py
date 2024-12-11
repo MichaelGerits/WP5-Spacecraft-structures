@@ -6,12 +6,12 @@ import math
 from scipy import optimize
 from coordinate_conversion import cylindrical_to_cartesian
 
-structuralCylinder = PartLib.StructuralCylinder(R=12) #TODO: update initial dimensions
+structuralCylinder = PartLib.StructuralCylinder(R=12, half_waves=1) #TODO: update initial dimensions
 
 if Main.eulerBuckling(structuralCylinder) < Loads.zstress:
     print("Fail")
 
-MichaelsBaneResultoOfLambda = optimize.minimize()
+MichaelsBaneResultoOfLambda = optimize.minimize(Main.bucklingK, [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, structuralCylinder.half.waves], bounds=optimize.Bounds([structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 0], [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 100]]))
 
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------

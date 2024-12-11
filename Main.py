@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import scipy
-import PartLib
+from iteration import structuralCylinder as cyl
 
 # Task 5.2 sizing primary structure for internal pressure.
 
@@ -19,12 +19,13 @@ def eulerBuckling(cylinder):
     critical_euler_stress = ((math.pi ** 2) * E * I) / A * (L**2)
     cylinder.critical_euler_stress = critical_euler_stress
 
-def bucklingK(cylinder):
-    L = cylinder.h
-    R = cylinder.R
-    t = cylinder.t
-    Poisson = cylinder.Poisson
-    half_waves = cylinder.walf_waves
+buckling_k_arr = numpy.array([cyl.h, cyl.R, cyl.t, cyl.Poisson, cyl.half.waves])
+def bucklingK(buckling_k_arr):
+    L = buckling_k_arr[0]
+    R = buckling_k_arr[1]
+    t = buckling_k_arr[2]
+    Poisson = buckling_k_arr[3]
+    half_waves = buckling_k_arr[4]
 
     buckling_k = half_waves + (12 * (L ** 4) * (1 - (Poisson ** 2)))/((math.pi ** 4) * (R ** 2) * (t ** 2) * half_waves)
     return buckling_k
