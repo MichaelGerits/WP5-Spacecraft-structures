@@ -1,8 +1,10 @@
 import numpy as np
 import math
+from coordinate_conversion import cylindrical_to_cartesian
 
 closingpanelAmount = 6
-transversePanelAmount = 2
+transversePanelHeight = 0.7 #m
+AttachmentPerPlate = 4
 
 
 
@@ -33,7 +35,7 @@ class StructuralCylinder:
         return area
 
     def calcMass(self):
-        mass = self.area * self.L
+        mass = self.area * self.h
         self.mass = mass
         return mass
 
@@ -47,7 +49,7 @@ class TransversePanel:
     """
     holds the geometry and properties of the transverse panels
     """
-    def __init__(self, R_outer=0, t_face=0, t_core=0, rho_face=0, rho_core=0, R_struct=0):
+    def __init__(self, R_outer=0, h=0, t_face=0, t_core=0, rho_face=0, rho_core=0, R_struct=0):
         self.R_outer = R_outer
         self.sideLength = R_outer
         self.t_face = t_face
@@ -55,6 +57,7 @@ class TransversePanel:
         self.rho_face = rho_face
         self.rho_core = rho_core
         self.R_struct = R_struct
+        self.h = h
         self.holes = [{"r": self.R_struct}] #list of dicts (as to ad positions later if needed)
         self.area =self.calcArea()
         self.mass = self.calcMass()
@@ -100,6 +103,7 @@ class ClosingPanel:
             area -= np.pi*hole["r"]**2
         self.area = area
         return area
+
     def calcMass(self):
         """
         calculates the mass of the panel
@@ -109,12 +113,12 @@ class ClosingPanel:
         return mass
     
 #--------------------------------------------------------------------------------------------------------
-class Attachement:
+class Attachment:
     """
-    stores the geometry and properties of A attachement 
+    stores the geometry and properties of A attachment
     """
-    def __init__(self, pos=np.array(0,0,0), mass=0, fastAmount1 = 2, fastAmount2 = 2):
-        self.pos = pos
+    def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
+        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
         self.mass = mass
         self.fastAmount1 = fastAmount1
         self.fastAmount2 = fastAmount2

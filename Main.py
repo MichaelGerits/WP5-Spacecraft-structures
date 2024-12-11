@@ -6,7 +6,7 @@ import PartLib
 # Task 5.2 sizing primary structure for internal pressure.
 
 def hoopStress(cylinder):
-    cylinder.t = cylinder.internal_pressure * cylinder.R / cylinder.SigmaY
+    cylinder.t = cylinder.p * cylinder.R / cylinder.SigmaY
 
 # Task 5.3 buckling
 
