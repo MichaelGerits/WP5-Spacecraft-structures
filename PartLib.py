@@ -25,6 +25,7 @@ class StructuralCylinder:
         self.mass = self.calcMass()
         self.half_waves = half_waves
         self.p = p
+        self.Poisson = Poisson
         pass
 
     def calcArea(self):
@@ -33,7 +34,7 @@ class StructuralCylinder:
         return area
 
     def calcMass(self):
-        mass = self.area * self.L
+        mass = self.area * self.h
         self.mass = mass
         return mass
 
@@ -109,9 +110,9 @@ class ClosingPanel:
         return mass
     
 #--------------------------------------------------------------------------------------------------------
-class Attachement:
+class Attachment:
     """
-    stores the geometry and properties of A attachement 
+    stores the geometry and properties of A attachment
     """
     def __init__(self, pos=np.array(0,0,0), mass=0, fastAmount1 = 2, fastAmount2 = 2):
         self.pos = pos
