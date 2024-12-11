@@ -1,5 +1,10 @@
 import numpy as np
 
+closingpanelAmount = 6
+transversePanelAmount = 2
+
+
+
 class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
