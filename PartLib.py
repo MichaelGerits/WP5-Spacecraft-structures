@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 class StructuralCylinder:
     """
@@ -11,7 +12,20 @@ class StructuralCylinder:
         self.E = E
         self.SigmaY = SigmaY
         self.rho=rho
+        self.area = self.calcArea()
+        self.inertia = self.calcInertia()
         pass
+
+    def calcArea(self):
+        area = 2 * math.pi * self.R * self.t
+        self.area = area
+        return area
+
+    def calcInertia(self):
+        inertia = math.pi * (self.R ** 3) * self.t
+        self.inertia = inertia
+        return inertia
+
 #---------------------------------------------------------------------------------------------------------------------------------------------
 class TransversePanel:
     """
