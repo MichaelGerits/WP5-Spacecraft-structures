@@ -12,7 +12,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0, h=0, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, half_waves=2):
+    def __init__(self, R=0, h=0, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, half_waves=2, p = 500000):
         self.R = R
         self.h = h
         self.t = t
@@ -26,6 +26,7 @@ class StructuralCylinder:
         self.inertia = self.calcInertia()
         self.mass = self.calcMass()
         self.half_waves = half_waves
+        self.p = p
         pass
 
     def calcArea(self):
@@ -114,7 +115,7 @@ class ClosingPanel:
 #--------------------------------------------------------------------------------------------------------
 class Attachment:
     """
-    stores the geometry and properties of A attachement 
+    stores the geometry and properties of A attachment
     """
     def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
         self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
