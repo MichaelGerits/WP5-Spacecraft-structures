@@ -48,7 +48,7 @@ class TransversePanel:
     """
     holds the geometry and properties of the transverse panels
     """
-    def __init__(self, R_outer=0, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0):
+    def __init__(self, R_outer=1, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0.28):
         self.R_outer = R_outer
         self.sideLength = R_outer
         self.t_face = t_face
