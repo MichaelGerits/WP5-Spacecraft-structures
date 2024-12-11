@@ -70,6 +70,7 @@ class ClosingPanel:
         """
         calculates the true area of the panel
         """
+        area = self.w * self.h
         for hole in self.holes:
             area -= np.pi*hole["r"]**2
         self.area = area
