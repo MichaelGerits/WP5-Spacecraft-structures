@@ -109,9 +109,9 @@ class ClosingPanel:
         return mass
     
 #--------------------------------------------------------------------------------------------------------
-class Attachement:
+class Attachment:
     """
-    stores the geometry and properties of A attachement 
+    stores the geometry and properties of A attachment
     """
     def __init__(self, pos=np.array(0,0,0), mass=0, fastAmount1 = 2, fastAmount2 = 2):
         self.pos = pos
