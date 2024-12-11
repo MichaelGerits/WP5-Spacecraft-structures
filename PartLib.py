@@ -16,7 +16,7 @@ class StructuralCylinder:
         self.E = E
         self.SigmaY = SigmaY
         self.rho=rho
-        pass
+        
 #---------------------------------------------------------------------------------------------------------------------------------------------
 class TransversePanel:
     """
