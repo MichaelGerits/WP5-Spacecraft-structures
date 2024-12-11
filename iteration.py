@@ -1,10 +1,12 @@
 import Main
 import numpy as np
 import PartLib
+import Loads
+import math
 
 structuralCylinder = PartLib.StructuralCylinder(R=12) #TODO: update initial dimensions
 
-if Main.eulerBuckling(structuralCylinder) > structuralCylinder.sigmacr:
+if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/(2*math.pi*structuralCylinder.R*structuralCylinder.t):
     print("Fail")
 
 
