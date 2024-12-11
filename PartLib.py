@@ -10,13 +10,15 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0, h=0, t=0, E=0, SigmaY=0, rho=0):
+    def __init__(self, R=0, h=0, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0):
         self.R = R
         self.h = h
         self.t = t
         self.E = E
         self.SigmaY = SigmaY
         self.rho=rho
+        self.critical_euler_stress = critical_euler_stress
+        self.critical_shell_stress = critical_shell_stress
         self.area = self.calcArea()
         self.inertia = self.calcInertia()
         pass

@@ -14,7 +14,7 @@ def eulerBuckling(cylinder):
     L = cylinder.h
 
     critical_euler_stress = ((math.pi ** 2) * E * I) / A * (L**2)
-    return critical_euler_stress
+    cylinder.critical_euler_stress = critical_euler_stress
 
 def bucklingK(cylinder):
     L = cylinder.h
@@ -47,4 +47,4 @@ def shellBuckling(cylinder):
     ratio1 = ((math.pi **2)*E)/(12*(1 - (Poisson**2)))
     ratio2 = (t/L)**2
     critical_shell_stress = coefficient * buckling_k * ratio1 * ratio2
-    return critical_shell_stress
+    cylinder.critical_shell_stress = critical_shell_stress
