@@ -25,7 +25,6 @@ class StructuralCylinder:
         self.mass = self.calcMass()
         self.half_waves = half_waves
         self.p = p
-        self.Poisson = Poisson
         pass
 
     def calcArea(self):
