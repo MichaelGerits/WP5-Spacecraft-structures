@@ -22,6 +22,7 @@ class StructuralCylinder:
         self.critical_shell_stress = critical_shell_stress
         self.area = self.calcArea()
         self.inertia = self.calcInertia()
+        self.mass = self.calcMass()
         self.half_waves = half_waves
         pass
 
@@ -29,6 +30,11 @@ class StructuralCylinder:
         area = 2 * math.pi * self.R * self.t
         self.area = area
         return area
+
+    def calcMass(self):
+        mass = self.area * self.L
+        self.mass = mass
+        return mass
 
     def calcInertia(self):
         inertia = math.pi * (self.R ** 3) * self.t
