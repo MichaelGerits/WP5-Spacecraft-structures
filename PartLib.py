@@ -96,3 +96,15 @@ class ClosingPanel:
         mass = 2*(self.calcArea()*self.t_face*self.rho_face) + self.calcArea()*self.t_core*self.rho_core
         self.mass = mass
         return mass
+    
+#--------------------------------------------------------------------------------------------------------
+class Attachement:
+    """
+    stores the geometry and properties of A attachement 
+    """
+    def __init__(self, pos=np.array(0,0,0), mass=0, fastAmount1 = 2, fastAmount2 = 2):
+        self.pos = pos
+        self.mass = mass
+        self.fastAmount1 = fastAmount1
+        self.fastAmount2 = fastAmount2
+        
