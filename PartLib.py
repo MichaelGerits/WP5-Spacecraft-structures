@@ -1,6 +1,11 @@
 import numpy as np
 import math
 
+closingpanelAmount = 6
+transversePanelAmount = 2
+
+
+
 class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
@@ -79,6 +84,7 @@ class ClosingPanel:
         """
         calculates the true area of the panel
         """
+        area = self.w * self.h
         for hole in self.holes:
             area -= np.pi*hole["r"]**2
         self.area = area
