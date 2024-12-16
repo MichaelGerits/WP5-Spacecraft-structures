@@ -19,6 +19,10 @@ Resulto_Lambda = optimize.minimize(Main.bucklingK, [structuralCylinder.h, struct
 print(Resulto_Lambda)
 structuralCylinder.buckling_k = Resulto_Lambda.fun
 
+#optimising for buckling (its scuffed)
+Resulto_Buck = optimize.minimize(Main.Buck, [])
+
+
 
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------
