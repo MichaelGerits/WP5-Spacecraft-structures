@@ -14,4 +14,3 @@ T = [430, 0, 129] #Nm
 
 p = 5e5
 
-zstress = P[2]/(2*math.pi*structuralCylinder.R*structuralCylinder.t)

@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import Main
 from coordinate_conversion import cylindrical_to_cartesian
 
 closingpanelAmount = 6
