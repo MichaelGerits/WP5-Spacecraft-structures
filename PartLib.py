@@ -124,4 +124,4 @@ class Attachment:
         self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
 
 
-structuralCylinder = StructuralCylinder(R=12, half_waves=1, t=0.001) #TODO: update initial dimensions
+structuralCylinder = StructuralCylinder(half_waves=1, t=0.001) #TODO: update initial dimensions
