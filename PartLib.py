@@ -13,7 +13,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0.28, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=0, Poisson=0, half_waves=2):
+    def __init__(self, R=0.28, h=1.5, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, buckling_k=0, internal_pressure = 500000, half_waves=0):
         self.R = R
         self.h = h
         self.t = t
@@ -21,11 +21,14 @@ class StructuralCylinder:
         self.SigmaY = SigmaY
         self.rho=rho
         self.Poisson = Poisson
+        self.critical_euler_stress = critical_euler_stress
+        self.critical_shell_stress = critical_shell_stress
         self.area = self.calcArea()
         self.inertia = self.calcInertia()
         self.mass = self.calcMass()
+        self.buckling_k = buckling_k
+        self.internal_pressure = internal_pressure
         self.half_waves = half_waves
-        self.p = p
         pass
 
     def calcArea(self):
@@ -81,7 +84,7 @@ class ClosingPanel:
     """
     stores the geometry and properties of A closing panel
     """
-    def __init__(self, w=0, h=0, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2):
+    def __init__(self, w=1, h=1.5, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2):
         self.h = h
         self.w = w
         self.t_face = t_face
@@ -113,14 +116,13 @@ class ClosingPanel:
 #--------------------------------------------------------------------------------------------------------
 class Attachment:
     """
-    stores the geometry and properties of A attachment
+    stores the geometry and properties of A attachement
     """
-    def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
-        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cylindrical coordinates so need to convert
+    def __init__(self, pos=np.array([0,0,0]), mass=0.016, fastAmount1 = 2, fastAmount2 = 2):
+        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
         self.mass = mass
-        self.fastAmount1 = fastAmount1
-        self.fastAmount2 = fastAmount2
+        self.fastAmount1 = fastAmount1 #amount of fasteners on the plate
+        self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
 
 
-
-
+structuralCylinder = StructuralCylinder(half_waves=1, t=0.001) #TODO: update initial dimensions
