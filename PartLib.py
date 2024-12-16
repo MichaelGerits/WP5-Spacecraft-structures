@@ -1,5 +1,6 @@
 import numpy as np
 import math
+import Main
 from coordinate_conversion import cylindrical_to_cartesian
 
 closingpanelAmount = 6
@@ -12,7 +13,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0, h=0, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, buckling_k=0, internal_pressure = 500000):
+    def __init__(self, R=0.28, h=1.5, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, buckling_k=0, internal_pressure = 500000):
         self.R = R
         self.h = h
         self.t = t
@@ -27,6 +28,8 @@ class StructuralCylinder:
         self.mass = self.calcMass()
         self.buckling_k = buckling_k
         self.internal_pressure = internal_pressure
+        self.half_waves = half_waves
+        self.p = p
         pass
 
     def calcArea(self):
@@ -49,7 +52,7 @@ class TransversePanel:
     """
     holds the geometry and properties of the transverse panels
     """
-    def __init__(self, R_outer=0, h=0, t_face=0, t_core=0, rho_face=0, rho_core=0, R_struct=0):
+    def __init__(self, R_outer=1, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0.28):
         self.R_outer = R_outer
         self.sideLength = R_outer
         self.t_face = t_face
@@ -57,7 +60,6 @@ class TransversePanel:
         self.rho_face = rho_face
         self.rho_core = rho_core
         self.R_struct = R_struct
-        self.h = h
         self.holes = [{"r": self.R_struct}] #list of dicts (as to ad positions later if needed)
         self.area =self.calcArea()
         self.mass = self.calcMass()
@@ -83,7 +85,7 @@ class ClosingPanel:
     """
     stores the geometry and properties of A closing panel
     """
-    def __init__(self, w=0, h=0, t_face=0, t_core=0, rho_face=0, rho_core=0):
+    def __init__(self, w=0, h=0, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2):
         self.h = h
         self.w = w
         self.t_face = t_face
@@ -118,7 +120,7 @@ class Attachment:
     stores the geometry and properties of A attachement
     """
     def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
-        self.pos = pos
+        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
         self.mass = mass
         self.fastAmount1 = fastAmount1
         self.fastAmount2 = fastAmount2
