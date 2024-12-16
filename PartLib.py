@@ -105,7 +105,7 @@ class ClosingPanel:
             area -= np.pi*hole["r"]**2
         self.area = area
         return area
-
+    
     def calcMass(self):
         """
         calculates the mass of the panel
