@@ -21,6 +21,12 @@ if structuralCylinder.critical_shell_stress < Loads.P[2]/structuralCylinder.calc
 Resulto_Lambda = optimize.minimize(Main.bucklingK, [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, structuralCylinder.half_waves], bounds=optimize.Bounds([structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 0], [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 100]))
 print(Resulto_Lambda)
 structuralCylinder.buckling_k = Resulto_Lambda.fun
+
+#optimising for buckling (its scuffed)
+Resulto_Buck = optimize.minimize(Main.Buck, [])
+
+
+
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------
 closePanelList = [PartLib.ClosingPanel(w=1, h=1.5)] * PartLib.closingpanelAmount
