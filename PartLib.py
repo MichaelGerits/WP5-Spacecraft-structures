@@ -1,6 +1,5 @@
 import numpy as np
 import math
-import Main
 from coordinate_conversion import cylindrical_to_cartesian
 
 closingpanelAmount = 6
@@ -13,7 +12,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0.28, h=1.5, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, buckling_k=0, internal_pressure = 500000):
+    def __init__(self, R=0.28, h=1.5, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, buckling_k=0, internal_pressure = 500000, half_waves=0):
         self.R = R
         self.h = h
         self.t = t
@@ -29,7 +28,6 @@ class StructuralCylinder:
         self.buckling_k = buckling_k
         self.internal_pressure = internal_pressure
         self.half_waves = half_waves
-        self.p = p
         pass
 
     def calcArea(self):
@@ -126,4 +124,4 @@ class Attachment:
         self.fastAmount2 = fastAmount2
 
 
-structuralCylinder = StructuralCylinder(R=12, half_waves=1) #TODO: update initial dimensions
+structuralCylinder = StructuralCylinder(R=12, half_waves=1, t=0.001) #TODO: update initial dimensions

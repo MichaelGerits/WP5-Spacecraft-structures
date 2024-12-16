@@ -21,7 +21,7 @@ def eulerBuckling(cylinder):
     critical_euler_stress = ((math.pi ** 2) * E * I) / A * (L**2)
     return critical_euler_stress
 
-buckling_k_arr = numpy.array([cyl.h, cyl.R, cyl.t, cyl.Poisson, cyl.half.waves])
+buckling_k_arr = np.array([cyl.h, cyl.R, cyl.t, cyl.Poisson, cyl.half_waves])
 def bucklingK(buckling_k_arr):
     L = buckling_k_arr[0]
     R = buckling_k_arr[1]
