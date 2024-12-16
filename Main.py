@@ -5,10 +5,8 @@ import PartLib
 import Loads
 from scipy import optimize
 
-# Task 5.2 sizing primary structure for internal pressure.
 
-# def hoopStress(cylinder):
-
+# hoop stress
 
 # Task 5.3 buckling
 
@@ -60,7 +58,7 @@ def Buck(arr, fixed): #optimises the structural cylinder
     buckling_k_op = optimize.minimize(bucklingK, x0=[half_waves], args=[L, R, t, Poisson]) #optimises half_waves for minimal buckling_k
     buckling_k = buckling_k_op.fun #takes the optimal value of buckling_k
     zstress = P / (2 * math.pi * R * t)
-    if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress and R / t > SigmaY / p:
+    if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress:
         return 2*math.pi*R*L*t # if the geometry works, it outputs the volume (not volume enclosed, but volume of the structure
     else:
         return 50000 # otherwise it outputs an arbitrary large value
