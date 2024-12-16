@@ -5,8 +5,8 @@ from PartLib import structuralCylinder
 """
 This document includes the loads and force calculations
 """
-volSmall = 0.3259
-volLarge = 0.2474
+volSmall = 0.3259 #volume of a small fuel tank
+volLarge = 0.2474 #volume of a large fuel tank
 volTot = volSmall+volLarge
 
 #N #if a component is zero, take 10% of the total

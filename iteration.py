@@ -16,7 +16,7 @@ while massdiff <= 1:
     # if Main.shellBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
     #     print("Fail by Shell Buckling")
 
-    #TODO: encapsulate into a loop with the newer total mass
+   
     """
     The original Buckling calculations are done assuming that the mass excluding the structural mass is added
     """
