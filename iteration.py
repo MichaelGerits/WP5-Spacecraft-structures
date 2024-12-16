@@ -14,7 +14,7 @@ print(Resulto_Lambda)
 structuralCylinder.buckling_k = Resulto_Lambda.fun
 
 #optimising for buckling (its scuffed)
-
+Resulto_Buck = optimize.minimize(Main.Buck, [])
 
 
 

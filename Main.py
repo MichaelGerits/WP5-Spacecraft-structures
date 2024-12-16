@@ -55,9 +55,10 @@ def shellBuckling(cylinder):
     critical_shell_stress = coefficient * buckling_k * ratio1 * ratio2
     return critical_shell_stress
 
-def OptopusBuck(arr):
+def Buck(arr):
 
-    if shellBuckling(arr1) > Loads.zstress and eulerBuckling(arr2) > Loads.zstress:
+    zstress = Loads.P[2] / (2 * math.pi * R * t)
+    if shellBuckling(Cylinder) > zstress and eulerBuckling(arr2) > zstress:
         return 2*math.pi*R*h
 
 #5.4----------------------------------------------------------------------------
