@@ -115,10 +115,13 @@ class ClosingPanel:
 #--------------------------------------------------------------------------------------------------------
 class Attachment:
     """
-    stores the geometry and properties of A attachment
+    stores the geometry and properties of A attachement
     """
     def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
-        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
+        self.pos = pos
         self.mass = mass
         self.fastAmount1 = fastAmount1
         self.fastAmount2 = fastAmount2
+
+
+structuralCylinder = StructuralCylinder(R=12, half_waves=1) #TODO: update initial dimensions

@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import scipy
-from iteration import structuralCylinder as cyl
+from PartLib import structuralCylinder as cyl
 
 # Task 5.2 sizing primary structure for internal pressure.
 
