@@ -12,6 +12,12 @@ Main.hoopStress(structuralCylinder) #gets the thickness by pressure calculation
 Resulto_Lambda = optimize.minimize(Main.bucklingK, [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, structuralCylinder.half_waves], bounds=optimize.Bounds([structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 0], [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 100]))
 print(Resulto_Lambda)
 structuralCylinder.buckling_k = Resulto_Lambda.fun
+
+#optimising for buckling (its scuffed)
+
+
+
+
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------
 closePanelList = [PartLib.ClosingPanel(w=1, h=1.5)] * PartLib.closingpanelAmount
