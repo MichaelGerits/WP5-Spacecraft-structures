@@ -7,6 +7,7 @@ from coordinate_conversion import cylindrical_to_cartesian
 
 structuralCylinder = PartLib.StructuralCylinder() #TODO: update initial dimensions
 
+Main.hoopStress(structuralCylinder) #gets the thickness by pressure calculation
 if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/(2*math.pi*structuralCylinder.R*structuralCylinder.t):
     print("Fail")
 
