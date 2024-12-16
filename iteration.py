@@ -8,7 +8,10 @@ from coordinate_conversion import cylindrical_to_cartesian
 structuralCylinder = PartLib.StructuralCylinder() #TODO: update initial dimensions
 
 if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/(2*math.pi*structuralCylinder.R*structuralCylinder.t):
-    print("Fail")
+    print("Fail by Euler Buckling")
+
+if Main.shellBuckling(structuralCylinder) < Loads.P[2]/(2*math.pi*structuralCylinder.R*structuralCylinder.t):
+    print("Fail by Shell Buckling")
 
 
 #allocates the initial lists

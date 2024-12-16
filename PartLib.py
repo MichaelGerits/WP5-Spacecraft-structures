@@ -116,7 +116,7 @@ class Attachment:
     stores the geometry and properties of A attachment
     """
     def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
-        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
+        self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cylindrical coordinates so need to convert
         self.mass = mass
         self.fastAmount1 = fastAmount1
         self.fastAmount2 = fastAmount2
