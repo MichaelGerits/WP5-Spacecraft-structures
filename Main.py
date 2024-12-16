@@ -42,14 +42,14 @@ def Buck(arr, fixed): #optimises the structural cylinder
     E = fixed[0]
     Poisson = fixed[1]
     SigmaY = fixed[2]
+    L = fixed[3]
     p = Loads.p
     P = Loads.P[2]
 
     # Geometric properties, will be optimised
     t = arr[0]
-    L = arr[1]
-    R = arr[2]
-    half_waves = arr[3]
+    R = arr[1]
+    half_waves = arr[2]
 
     #Some more (geometric) properties
     I = math.pi * (R ** 3) * t
