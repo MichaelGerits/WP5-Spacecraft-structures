@@ -7,22 +7,23 @@ import math
 from scipy import optimize
 from coordinate_conversion import cylindrical_to_cartesian
 
-Main.hoopStress(structuralCylinder) #gets the thickness by pressure calculation
+# Main.hoopStress(structuralCylinder) #gets the thickness by pressure calculation
+#
+# if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
+#     print("Fail by Euler Buckling")
+#
+# if Main.shellBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
+#     print("Fail by Shell Buckling")
 
-if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
-    print("Fail by Euler Buckling")
-
-if Main.shellBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
-    print("Fail by Shell Buckling")
-
-Resulto_Lambda = optimize.minimize(Main.bucklingK, [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, structuralCylinder.half_waves], bounds=optimize.Bounds([structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 0], [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 100]))
-print(Resulto_Lambda)
-structuralCylinder.buckling_k = Resulto_Lambda.fun
 
 #optimising for buckling (its scuffed)
-Resulto_Buck = optimize.minimize(Main.Buck, [])
-
-
+Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.h, structuralCylinder.R, structuralCylinder.half_waves], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY])
+print(Resulto_Buck)
+structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun
+structuralCylinder.t = Resulto_Buck.x[0]
+structuralCylinder.h = Resulto_Buck.x[1]
+structuralCylinder.R = Resulto_Buck.x[2]
+structuralCylinder.half_waves = Resulto_Buck.x[3]
 
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------

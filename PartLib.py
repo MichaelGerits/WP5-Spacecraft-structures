@@ -1,6 +1,5 @@
 import numpy as np
 import math
-import Main
 from coordinate_conversion import cylindrical_to_cartesian
 
 closingpanelAmount = 6
@@ -13,7 +12,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0.28, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, critical_euler_stress=0, critical_shell_stress=0, Poisson=0.32, buckling_k=0, half_waves=0):
+    def __init__(self, R=0.28, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, critical_euler_stress=0, critical_shell_stress=0, Poisson=0.32, buckling_k=0, half_waves=0, mass=0):
         self.R = R
         self.h = h
         self.t = t
@@ -23,27 +22,10 @@ class StructuralCylinder:
         self.Poisson = Poisson
         self.critical_euler_stress = critical_euler_stress
         self.critical_shell_stress = critical_shell_stress
-        self.area = self.calcArea()
-        self.inertia = self.calcInertia()
-        self.mass = self.calcMass()
+        self.mass = mass
         self.buckling_k = buckling_k
         self.half_waves = half_waves
         pass
-
-    def calcArea(self):
-        area = 2 * math.pi * self.R * self.t
-        self.area = area
-        return area
-
-    def calcMass(self):
-        mass = self.area * self.h
-        self.mass = mass
-        return mass
-
-    def calcInertia(self):
-        inertia = math.pi * (self.R ** 3) * self.t
-        self.inertia = inertia
-        return inertia
 
 #---------------------------------------------------------------------------------------------------------------------------------------------
 class TransversePanel:
@@ -124,4 +106,4 @@ class Attachment:
         self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
 
 
-structuralCylinder = StructuralCylinder(half_waves=1) #TODO: update initial dimensions
+structuralCylinder = StructuralCylinder(t=0.001, half_waves=1) #TODO: update initial dimensions
