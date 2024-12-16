@@ -15,7 +15,9 @@ from coordinate_conversion import cylindrical_to_cartesian
 # if Main.shellBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
 #     print("Fail by Shell Buckling")
 
-
+"""
+The original Buckling calculations are done assuming that the mass excluding the structural mass is added
+"""
 #optimising for buckling (its scuffed)
 Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.h, structuralCylinder.R, structuralCylinder.half_waves], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY])
 print(Resulto_Buck) #prints the results of the optimiser

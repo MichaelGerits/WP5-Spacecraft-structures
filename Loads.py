@@ -7,8 +7,11 @@ This document includes the loads and force calculations
 """
 
 #resulting force [Px, Py, Pz]
-P = [538.6, 538.6, 1795] #N #if a component is zero, take 10% of the total
-A = [1.8*9.81,1.8*9.81,6*9.81]
+#N #if a component is zero, take 10% of the total
+initialTotalMass = 355 + 1085 #inittial mass of the spacecraft without adding the structure
+totalMass = initialTotalMass
+A = np.array([1.8*9.81,1.8*9.81,6*9.81])
+P = A * totalMass
 #resulting Moment [Mx, My, Mz]
 T = [430, 0, 129] #Nm
 
