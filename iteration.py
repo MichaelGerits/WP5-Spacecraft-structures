@@ -9,10 +9,13 @@ from coordinate_conversion import cylindrical_to_cartesian
 
 Main.hoopStress(structuralCylinder) #gets the thickness by pressure calculation
 
-if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
+structuralCylinder.critical_euler_stress = Main.eulerBuckling(structuralCylinder)
+structuralCylinder.critical_shell_stress = Main.shellBuckling(structuralCylinder)
+
+if structuralCylinder.critical_euler_stress < Loads.P[2]/structuralCylinder.calcArea():
     print("Fail by Euler Buckling")
 
-if Main.shellBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
+if structuralCylinder.critical_shell_stress < Loads.P[2]/structuralCylinder.calcArea():
     print("Fail by Shell Buckling")
 
 Resulto_Lambda = optimize.minimize(Main.bucklingK, [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, structuralCylinder.half_waves], bounds=optimize.Bounds([structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 0], [structuralCylinder.h, structuralCylinder.R, structuralCylinder.t, structuralCylinder.Poisson, 100]))
