@@ -4,7 +4,7 @@ from coordinate_conversion import cylindrical_to_cartesian
 
 closingpanelAmount = 6
 transversePanelHeight = 0.7 #m
-AttachmentPerPlate = 4
+AttachmentPerPlate = 6
 
 
 

@@ -5,13 +5,15 @@ from PartLib import structuralCylinder
 """
 This document includes the loads and force calculations
 """
+volSmall = 0.3259
+volLarge = 0.2474
+volTot = volSmall+volLarge
 
-#resulting force [Px, Py, Pz]
 #N #if a component is zero, take 10% of the total
-initialTotalMass = 355 + 1085 #inittial mass of the spacecraft without adding the structure
+initialTotalMass = 129.1 #mass not including what is attached to the 
 totalMass = initialTotalMass
 A = np.array([1.8*9.81,1.8*9.81,6*9.81])
-P = A * totalMass
+P = A * totalMass #resulting force [Px, Py, Pz]
 #resulting Moment [Mx, My, Mz]
 T = [430, 0, 129] #Nm
 

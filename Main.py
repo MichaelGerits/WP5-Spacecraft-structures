@@ -77,8 +77,12 @@ def CalcMass(panels, attach):
     return panelMass + attachMass
 
 #5.5-----------------------------------------------------------------------------------
-def CalcPanelLoads():
+def CalcPanelLoads(initMass):
     A = Loads.A
-    
+    #TODO:need to define which masses act where
+    #TODO: divide that load over the attachements
+    return (P1, P2)
 def CalcAttachForces():
-    return
+    #TODO: size the attachments on they're independent loads
+    return AttPList
+    #TODO: divide over the fasteners
