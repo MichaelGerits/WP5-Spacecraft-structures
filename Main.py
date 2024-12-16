@@ -54,3 +54,15 @@ def shellBuckling(cylinder):
     ratio2 = (t/L)**2
     critical_shell_stress = coefficient * buckling_k * ratio1 * ratio2
     return critical_shell_stress
+
+#5.4----------------------------------------------------------------------------
+def CalcMass(panels, attach):
+    panelMass = 0
+    for panel in panels:
+        panelMass += panel.calcMass()
+
+    attachMass = 0
+    for att in attach:
+        attachMass += att.mass
+
+    return panelMass + attachMass

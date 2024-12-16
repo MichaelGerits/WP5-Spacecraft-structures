@@ -13,7 +13,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=0.28, h=1.5, t=0, E=0, SigmaY=0, rho=0, critical_euler_stress=0, critical_shell_stress=0, Poisson=0, buckling_k=0, internal_pressure = 500000, half_waves=0):
+    def __init__(self, R=0.28, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, critical_euler_stress=0, critical_shell_stress=0, Poisson=0.32, buckling_k=0, half_waves=0):
         self.R = R
         self.h = h
         self.t = t
@@ -27,7 +27,6 @@ class StructuralCylinder:
         self.inertia = self.calcInertia()
         self.mass = self.calcMass()
         self.buckling_k = buckling_k
-        self.internal_pressure = internal_pressure
         self.half_waves = half_waves
         pass
 
@@ -125,4 +124,4 @@ class Attachment:
         self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
 
 
-structuralCylinder = StructuralCylinder(half_waves=1, t=0.001) #TODO: update initial dimensions
+structuralCylinder = StructuralCylinder(half_waves=1) #TODO: update initial dimensions
