@@ -41,6 +41,8 @@ while massdiff <= 1:
     Loads.totalMass=Loads.initialTotalMass + Panel1Mass + Panel2Mass + structuralCylinder.mass
     Loads.P = Loads.A * Loads.totalMass
 
+    #TODO: update the attachment force and thus their mass
+
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     #optimising for buckling (its scuffed)
@@ -58,4 +60,5 @@ while massdiff <= 1:
     print(f"t = {structuralCylinder.t} m, h = {structuralCylinder.h} m, R = {structuralCylinder.R} m")
 
     massdiff = structuralCylinder.mass #TODO: add all the mass that is added in the itteration
+
 
