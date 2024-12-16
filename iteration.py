@@ -14,8 +14,8 @@ if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/(2*math.pi*structuralCyli
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------
 closePanelList = [PartLib.ClosingPanel(w=1, h=1.5)] * PartLib.closingpanelAmount
-transversePanelList = [PartLib.TransversePanel(R_outer=1)] * 2 #TODO: add initial dimensions
-Attachments = []
+transversePanelList = [PartLib.TransversePanel()] * 2 + [PartLib.TransversePanel(R_struct=0)] #2transverse panels + 1 closing panels
+Attachments = [] #initialise list
 angles = np.linspace(0,360,num=PartLib.AttachmentPerPlate) #equally space the attachments
 
 for i in range(PartLib.AttachmentPerPlate, step=2): #assign the positions

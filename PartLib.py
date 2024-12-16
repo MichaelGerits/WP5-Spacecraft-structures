@@ -25,7 +25,6 @@ class StructuralCylinder:
         self.inertia = self.calcInertia()
         self.mass = self.calcMass()
         self.half_waves = half_waves
-        self.p = p
         pass
 
     def calcArea(self):
@@ -81,7 +80,7 @@ class ClosingPanel:
     """
     stores the geometry and properties of A closing panel
     """
-    def __init__(self, w=0, h=0, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2):
+    def __init__(self, w=1, h=1.5, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2):
         self.h = h
         self.w = w
         self.t_face = t_face
@@ -115,11 +114,11 @@ class Attachment:
     """
     stores the geometry and properties of A attachment
     """
-    def __init__(self, pos=np.array([0,0,0]), mass=0, fastAmount1 = 2, fastAmount2 = 2):
+    def __init__(self, pos=np.array([0,0,0]), mass=0.016, fastAmount1 = 2, fastAmount2 = 2):
         self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
         self.mass = mass
-        self.fastAmount1 = fastAmount1
-        self.fastAmount2 = fastAmount2
+        self.fastAmount1 = fastAmount1 #amount of fasteners on the plate
+        self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
 
 
 
