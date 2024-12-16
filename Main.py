@@ -33,7 +33,7 @@ def bucklingK(buckling_k_arr):
     return buckling_k
 
 def bucklingQ(cylinder):
-    p = cylinder.p
+    p = Loads.p
     E = cylinder.E
     R = cylinder.R
     t = cylinder.t
