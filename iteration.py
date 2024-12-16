@@ -18,12 +18,17 @@ from coordinate_conversion import cylindrical_to_cartesian
 
 #optimising for buckling (its scuffed)
 Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.h, structuralCylinder.R, structuralCylinder.half_waves], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY])
-print(Resulto_Buck)
-structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun
+print(Resulto_Buck) #prints the results of the optimiser
+structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun #the function output volume, so the mass is the output(.fun) times density
+
+# updates structuralCylinder with the values given by the optimiser
 structuralCylinder.t = Resulto_Buck.x[0]
 structuralCylinder.h = Resulto_Buck.x[1]
 structuralCylinder.R = Resulto_Buck.x[2]
 structuralCylinder.half_waves = Resulto_Buck.x[3]
+
+#final check just to make sure
+print(f"t = {structuralCylinder.t} m, h = {structuralCylinder.h} m, R = {structuralCylinder.R} m")
 
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------
