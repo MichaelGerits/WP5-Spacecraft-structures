@@ -29,3 +29,5 @@ for i in range(1, PartLib.AttachmentPerPlate, 2): #assign the positions
     Attachments.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], 0]))) #lower plate
     Attachments.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], PartLib.transversePanelHeight]))) #upper plate
 #-----------------------------------------------------------------------------------------------------------------------------------
+
+att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachments)

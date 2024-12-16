@@ -59,3 +59,15 @@ def OptopusBuck(arr):
 
     if shellBuckling(arr1) > Loads.zstress and eulerBuckling(arr2) > Loads.zstress:
         return 2*math.pi*R*h
+
+#5.4----------------------------------------------------------------------------
+def CalcMass(panels, attach):
+    panelMass = 0
+    for panel in panels:
+        panelMass += panel.calcMass()
+
+    attachMass = 0
+    for att in attach:
+        attachMass += att.mass
+
+    return panelMass + attachMass
