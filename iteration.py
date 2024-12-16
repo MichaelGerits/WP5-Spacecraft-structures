@@ -27,6 +27,9 @@ structuralCylinder.h = Resulto_Buck.x[1]
 structuralCylinder.R = Resulto_Buck.x[2]
 structuralCylinder.half_waves = Resulto_Buck.x[3]
 
+#final check just to make sure
+print(f"t = {structuralCylinder.t} m, h = {structuralCylinder.h} m, R = {structuralCylinder.R} m")
+
 #allocates the initial lists
 #----------------------------------------------------------------------------------------------------------------------------------
 closePanelList = [PartLib.ClosingPanel(w=1, h=1.5)] * PartLib.closingpanelAmount
