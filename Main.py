@@ -75,3 +75,10 @@ def CalcMass(panels, attach):
         attachMass += att.mass
 
     return panelMass + attachMass
+
+#5.5-----------------------------------------------------------------------------------
+def CalcPanelLoads():
+    A = Loads.A
+    
+def CalcAttachForces():
+    return

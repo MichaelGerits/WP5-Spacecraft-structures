@@ -43,3 +43,7 @@ for i in range(1, PartLib.AttachmentPerPlate, 2): #assign the positions
 #-----------------------------------------------------------------------------------------------------------------------------------
 
 att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachments)
+
+Panel1Mass = [] #list of masses on the first transverse panel
+Panel2Mass = [] #list of masses on the second transverse panel
+
