@@ -161,5 +161,7 @@ class Attachment:
     
     def CalcMass(self):
         mass = 2*(self.w*self.depth) * self.t * self.rho
+        self.mass = mass
+        return mass
 
 structuralCylinder = StructuralCylinder(t=0.001, half_waves=1) #TODO: update initial dimensions
