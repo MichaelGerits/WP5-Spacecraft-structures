@@ -90,6 +90,8 @@ def CalcAttachForces(P):
     #TODO: size the attachments on they're independent loads
     return AttPList
     #TODO: divide over the fasteners
+
+    
 def FindHighestLoadAttch(attachments):
     """
     finds the attachment with the highest load

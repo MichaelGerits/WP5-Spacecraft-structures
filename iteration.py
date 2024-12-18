@@ -32,15 +32,13 @@ while massdiff >= 1:
     Attachmentsupper = [] #initialise list
     Attachmentslower = [] #initialise list
     Attachmentsprop = [] #initialise list
-    Attachmentshelium = [] #initialise list
     angles = np.linspace(0,360,num=PartLib.AttachmentPerPlate) #equally space the attachments
 
     #get the load fraction to guess initial weight of hinges
     frac = np.linalg.norm(P)/np.linalg.norm(np.array([538.6, 538.6, 1795]))
 
     #attachments to the propellant tanks
-    Attachmentsprop = [PartLib.Attachment()] * 12
-    Attachmentsprop = [PartLib.Attachment()] * 3
+    Attachmentsprop = [PartLib.Attachment()] * 12 #12 brackets on the top panel (carry half the load)
     #attachments to the structural cylinder
     for i in range(1, PartLib.AttachmentPerPlate, 2): #assign the positions
         Attachmentsupper.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], 0]), mass=frac*0.016)) #lower plate
@@ -58,11 +56,13 @@ while massdiff >= 1:
     for later iterations of the structural cylinder
     """
 
-    att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachmentsupper+Attachmentslower+Attachmentshelium+Attachmentsprop) #calculates th 
+    att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachmentsupper+Attachmentslower+Attachmentsprop) #calculates th 
 
     Panel1Mass = 118.21 + (1085/2) +  att_and_panelMass/2 #mass on the first transverse panel
     Panel2Mass = 104.3 + (1085/2) + att_and_panelMass/2 #mass on the second transverse panel
 
+    attHighest = Main.FindHighestLoadAttch(Attachmentslower+Attachmentsupper+Attachmentsprop)
+    Main.ItterateAttach(attHighest, Attachmentsprop+Attachmentslower+Attachmentsupper)
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
