@@ -30,7 +30,7 @@ class TransversePanel:
     """
     holds the geometry and properties of the transverse panels
     """
-    def __init__(self, R_outer=1, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0.28):
+    def __init__(self, R_outer=1, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0.28, holes=[]):
         self.R_outer = R_outer
         self.sideLength = R_outer
         self.t_face = t_face
@@ -38,7 +38,7 @@ class TransversePanel:
         self.rho_face = rho_face
         self.rho_core = rho_core
         self.R_struct = R_struct
-        self.holes = [{"r": self.R_struct}] #list of dicts (as to ad positions later if needed)
+        self.holes = [{"r": self.R_struct}] + holes #list of dicts (as to ad positions later if needed)
         self.area =self.calcArea()
         self.mass = self.calcMass()
 
@@ -97,11 +97,59 @@ class Attachment:
     """
     stores the geometry and properties of A attachement
     """
-    def __init__(self, pos=np.array([0,0,0]), mass=0.016, fastAmount1 = 2, fastAmount2 = 2):
+    def __init__(self, pos=np.array([0,0,0]), mass=0.016, fastAmount1 = 2, fastAmount2 = 2, t = 0.001, zload=0, SigmaY=4.14e7, SigmaB=662e6):
         self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
         self.mass = mass
         self.fastAmount1 = fastAmount1 #amount of fasteners on the plate
         self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
+        self.fastDiameter = 0.005
+        self.w = self.fastDiameter * (2 * 2 + 2.5)
+        e1 = self.fastDiameter*2
+        e2 = self.fastDiameter*2
+        self.depth = (2* e2 + 2*self.fastDiameter)
 
+
+    def CheckBearing(self, cyl):
+        """
+        This check also includes the thermal stress (calculated manually)
+        """
+        sigmaTh = 95e6
+        result = [1,1]
+        for i in range(4):
+            P = self.zload/4 * 1.5
+
+            #bearing check for the baseplate thickness
+            if P/(self.fastDiameter*self.t) + sigmaTh > self.SigmaB:
+                result[0] = 0
+
+            #bearing check for the spacecraft wall
+            if P/(self.fastDiameter*cyl.t) + sigmaTh > 1350e6:
+                result[1] = 0
+        return result
+    
+    def CheckPullThrough(self):
+        """
+        checks if the pullthrough passes
+        """
+        check = []
+        for i in range(4):   #iterate through all fastener objects
+            areabolthead = (0.008/2)**2 * math.pi - (0.005/2)**2 * math.pi    #calculate area on which compressive stress acts
+            sigmay = self.zload/(areabolthead * 4)      #calculate compressive stress
+            areat2 = math.pi * 0.008 * self.t   #calculate areas over which the shear stress will act
+            areat3 = math.pi * 0.008 * (15e-3+2*0.19805e-3)
+            tau2 = self.zload/areat2      #calculate shear stresses
+            tau3 = self.zload/areat3
+            if areat2 <= areat3:   #calculate von mises stress for greater shear stress
+                vonmises = math.sqrt(sigmay**2 + 3 * tau2**2)
+            else:
+                vonmises = math.sqrt(sigmay**2 + 3 * tau3**2)
+
+            if vonmises < self.sigmaY:  #if vonmises stress is below tensile yield stress, test is passed and add true, if vonmises stress is higher add false to list
+                check.append(1)
+
+            else:
+                check.append(0)
+        
+        return check
 
 structuralCylinder = StructuralCylinder(t=0.001, half_waves=1) #TODO: update initial dimensions

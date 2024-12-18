@@ -7,11 +7,9 @@ import math
 from scipy import optimize
 from coordinate_conversion import cylindrical_to_cartesian
 
-preliminary_thickness = 0.000001
+
 preliminary_radius = 0.28
-while Main.HoopStress(Loads.p, preliminary_radius, preliminary_thickness) >= structuralCylinder.SigmaY:
-    preliminary_thickness += 0.000001
-preliminary_thickness = round(preliminary_thickness, 5)
+preliminary_thickness = round((Loads.p * preliminary_radius)/structuralCylinder.SigmaY, 6)
 
 Mass = [0, Loads.initialTotalMass]
 acceleration = Loads.acceleration
@@ -29,31 +27,41 @@ while massdiff >= 1:
     #allocates the initial lists
     #----------------------------------------------------------------------------------------------------------------------------------
     closePanelList = [PartLib.ClosingPanel(w=1, h=1.5)] * PartLib.closingpanelAmount
-    transversePanelList = [PartLib.TransversePanel()] * 2 + [PartLib.TransversePanel(R_struct=0)] #2transverse panels + 1 closing panels
-    Attachments = [] #initialise list
+    transversePanelList = [PartLib.TransversePanel(), PartLib.TransversePanel([{"r": 0.2682}]*4)] + [PartLib.TransversePanel(R_struct=0)] #2transverse panels + 1 closing panels
+    Attachmentsupper = [] #initialise list
+    Attachmentslower = [] #initialise list
+    Attachmentsprop = [] #initialise list
+    Attachmentshelium = [] #initialise list
     angles = np.linspace(0,360,num=PartLib.AttachmentPerPlate) #equally space the attachments
 
+    #get the load fraction to guess initial weight of hinges
+    frac = np.linalg.norm(Loads.P)/np.linalg.norm(np.array([538.6, 538.6, 1795]))
+
+    #attachments to the propellant tanks
+    Attachmentsprop = [PartLib.Attachment()] * 12
+    Attachmentsprop = [PartLib.Attachment()] * 3
+    #attachments to the structural cylinder
     for i in range(1, PartLib.AttachmentPerPlate, 2): #assign the positions
-        Attachments.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], 0]))) #lower plate
-        Attachments.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], PartLib.transversePanelHeight]))) #upper plate
+        Attachmentsupper.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], 0]), mass=frac*0.016)) #lower plate
+        Attachmentslower.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], PartLib.transversePanelHeight]), mass=frac*0.016)) #upper plate
+
+    #TODO: add attachments for the fueltanks (for both the prop tanks and helium) + loads
     #-----------------------------------------------------------------------------------------------------------------------------------
 
-    #TODO: update attchment objzct to include geometry
-    #TODO: get load fraction
-    #TODO: specify which attachments carry which loads
-    #TODO: calculate highest mass bracket
-    #TODO: update attchment objzct to include geometry
-    #TODO: calc bearing and pullthrough ->new mass
-    #TODO: subtract the holes due to the fueltanks
+    #TODO: specify which attachments carry which loads []
+    #TODO: update facts []
+    #TODO: update mass with new attachments
 
     """
     Here the forces on the transverse panels are calculated and then these are added to the load P 
     for later iterations of the structural cylinder
     """
 
-    att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachments)
-    Panel1Mass = 110 + 0.5 * (Loads.volLarge/Loads.volTot*1085) + (Loads.volSmall/Loads.volTot*1085) + att_and_panelMass/2 #mass on the first transverse panel
-    Panel2Mass = 115.9 + 0.5 * (Loads.volLarge/Loads.volTot*1085) + att_and_panelMass/2 #mass on the second transverse panel
+    att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachmentsupper+Attachmentslower+Attachmentshelium+Attachmentsprop) #calculates th 
+
+    Panel1Mass = 118.21 + (1085/2) +  att_and_panelMass/2 #mass on the first transverse panel
+    Panel2Mass = 104.3 + (1085/2) + att_and_panelMass/2 #mass on the second transverse panel
+
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

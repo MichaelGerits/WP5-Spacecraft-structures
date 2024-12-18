@@ -86,7 +86,40 @@ def CalcPanelLoads(initMass):
     #TODO:need to define which masses act where
     #TODO: divide that load over the attachements
     return (P1, P2)
-def CalcAttachForces():
+def CalcAttachForces(P):
     #TODO: size the attachments on they're independent loads
     return AttPList
     #TODO: divide over the fasteners
+def FindHighestLoadAttch(attachments):
+    """
+    finds the attachment with the highest load
+    """
+    z = 0
+    for attach in attachments:
+        if attach.zload > z:
+            att = attach
+            z=attach.zload
+    return att
+
+def ItterateAttach(att,attachements):
+    """
+    itterates the thickness of the attachment such that it passes the test.
+    updates the geometry of the attachments
+    "att" is the highest loaded attachement
+    """
+    #bearing check
+    checkResult = att.CheckBearing(cyl)
+    while 0 in checkResult:
+        updateVal = np.abs(np.array(checkResult) - 1) * 0.001
+        for i in attachements:
+            i.t += updateVal[0]
+        cyl.t += updateVal[1]
+        checkResult = att.CheckBearing(cyl)
+
+    #pullthrough check
+    checkResult, MS = att.CheckPullThrough()
+    while 0 in checkResult:
+        for i in attachements:
+            i.t += 0.0005
+        checkResult= att.CheckPullThrough()
+
