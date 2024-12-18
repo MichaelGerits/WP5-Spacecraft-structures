@@ -13,11 +13,18 @@ while Main.HoopStress(Loads.p, preliminary_radius, preliminary_thickness) >= str
     preliminary_thickness += 0.000001
 preliminary_thickness = round(preliminary_thickness, 5)
 
-massdiff = 10
+Mass = [0, Loads.initialTotalMass]
+acceleration = Loads.acceleration
+importantIndex = 0
+massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex-1) % 2])
+
 while massdiff >= 1:
+    print(Mass)
     """
     The original Buckling calculations are done assuming that the mass excluding the structural mass is added
     """
+
+    P = acceleration * Mass[(importantIndex -1) % 2]
 
     #allocates the initial lists
     #----------------------------------------------------------------------------------------------------------------------------------
@@ -48,12 +55,6 @@ while massdiff >= 1:
     Panel1Mass = 110 + 0.5 * (Loads.volLarge/Loads.volTot*1085) + (Loads.volSmall/Loads.volTot*1085) + att_and_panelMass/2 #mass on the first transverse panel
     Panel2Mass = 115.9 + 0.5 * (Loads.volLarge/Loads.volTot*1085) + att_and_panelMass/2 #mass on the second transverse panel
 
-    #updates the total load on the structural cylinder
-    Loads.totalMass=Loads.initialTotalMass + Panel1Mass + Panel2Mass + structuralCylinder.mass
-    Loads.P = Loads.A * Loads.totalMass
-
-    #TODO: update the attachment force and thus their mass
-
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     """
@@ -69,7 +70,7 @@ while massdiff >= 1:
     #     print("Fail by Shell Buckling")
 
     #optimising for buckling (its scuffed)
-    Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h], bounds=optimize.Bounds([preliminary_thickness, 0.001], [0.1, 0.28]))
+    Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h, P], bounds=optimize.Bounds([preliminary_thickness, 0.001], [0.1, 0.28]))
     print(Resulto_Buck) #prints the results of the optimiser
     structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun #the function output volume, so the mass is the output(.fun) times density
     # updates structuralCylinder with the values given by the optimiser
@@ -78,6 +79,9 @@ while massdiff >= 1:
     #final check just to make sure
     print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
 
-    massdiff = structuralCylinder.mass #TODO: add all the mass that is added in the itteration
+    Mass[importantIndex % 2] = Loads.initialTotalMass + structuralCylinder.mass + Panel1Mass #TODO: add all the mass that is added in the itteration
+    massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex - 1) % 2])
+    importantIndex +=1
+    print(Mass, "Hi")
 
 
