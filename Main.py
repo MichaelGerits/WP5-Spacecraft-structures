@@ -97,7 +97,7 @@ def FindHighestLoadAttch(attachments):
     finds the attachment with the highest load
     """
     z = 0
-    att = None
+    att = 0
     for attach in attachments:
         if attach.zload > z:
             att = attach
