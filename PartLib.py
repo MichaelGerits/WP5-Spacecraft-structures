@@ -151,7 +151,7 @@ class Attachment:
             else:
                 vonmises = math.sqrt(sigmay**2 + 3 * tau3**2)
 
-            if vonmises < self.sigmaY:  #if vonmises stress is below tensile yield stress, test is passed and add true, if vonmises stress is higher add false to list
+            if vonmises < self.SigmaY:  #if vonmises stress is below tensile yield stress, test is passed and add true, if vonmises stress is higher add false to list
                 check.append(1)
 
             else:

@@ -120,7 +120,7 @@ def ItterateAttach(att,attachements):
         checkResult = att.CheckBearing(cyl)
 
     #pullthrough check
-    checkResult, MS = att.CheckPullThrough()
+    checkResult = att.CheckPullThrough()
     while 0 in checkResult:
         for i in attachements:
             i.t += 0.0005
