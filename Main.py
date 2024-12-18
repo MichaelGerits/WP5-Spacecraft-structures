@@ -91,12 +91,13 @@ def CalcAttachForces(P):
     return AttPList
     #TODO: divide over the fasteners
 
-    
+
 def FindHighestLoadAttch(attachments):
     """
     finds the attachment with the highest load
     """
     z = 0
+    att = None
     for attach in attachments:
         if attach.zload > z:
             att = attach

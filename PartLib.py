@@ -97,7 +97,7 @@ class Attachment:
     """
     stores the geometry and properties of A attachement
     """
-    def __init__(self, pos=np.array([0,0,0]), mass=0.016, fastAmount1 = 2, fastAmount2 = 2, t = 0.001, zload=0, SigmaY=4.14e7, SigmaB=662e6):
+    def __init__(self, pos=np.array([0,0,0]), mass=0.016, fastAmount1 = 2, fastAmount2 = 2, t = 0.001, zload=0, SigmaY=4.14e7, SigmaB=662e6, rho=0):
         self.pos = np.array(cylindrical_to_cartesian(pos[0], pos[0], pos[0])) #position is in cilindrical coordinates so need to convert
         self.mass = mass
         self.fastAmount1 = fastAmount1 #amount of fasteners on the plate
@@ -108,6 +108,7 @@ class Attachment:
         self.SigmaY = SigmaY
         self.SigmaB = SigmaB
         self.zload = zload
+        self.rho = rho
 
         self.w = self.fastDiameter * (2 * 2 + 2.5)
         e1 = self.fastDiameter*2
@@ -157,5 +158,8 @@ class Attachment:
                 check.append(0)
         
         return check
+    
+    def CalcMass(self):
+        mass = 2*(self.w*self.depth) * self.t * self.rho
 
 structuralCylinder = StructuralCylinder(t=0.001, half_waves=1) #TODO: update initial dimensions

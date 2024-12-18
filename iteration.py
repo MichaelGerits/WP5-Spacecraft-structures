@@ -49,7 +49,7 @@ while massdiff >= 1:
 
     #TODO: specify which attachments carry which loads []
     #TODO: update facts []
-    #TODO: update mass with new attachments
+    #TODO: update mass with new attachments []
 
     """
     Here the forces on the transverse panels are calculated and then these are added to the load P 
@@ -81,7 +81,7 @@ while massdiff >= 1:
     #final check just to make sure
     print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
 
-    Mass[importantIndex % 2] = Loads.initialTotalMass + structuralCylinder.mass + Panel1Mass #TODO: add all the mass that is added in the itteration
+    Mass[importantIndex % 2] = Loads.initialTotalMass + structuralCylinder.mass + Panel1Mass + Panel2Mass#TODO: add all the mass that is added in the itteration
     massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex - 1) % 2])
     importantIndex +=1
     print(Mass, "Hi")
