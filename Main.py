@@ -40,6 +40,10 @@ def HoopStress(pressure, radius, thickness):
     stress = (pressure * radius)/thickness
     return stress
 
+def constrainer(cyl, P):
+    listo = [P*0.28/cyl.SigmaY, (math.sqrt(2) * P * 1.5) / (2 * (math.pi)**2 * math.sqrt(cyl.E))]
+    return max(listo)
+
 def Buck(arr, fixed): #optimises the structural cylinder
 
     #fixed material properties, not optimised
@@ -60,12 +64,13 @@ def Buck(arr, fixed): #optimises the structural cylinder
     buckling_Q = bucklingQ(p, E, R, t)
     buckling_k_op = optimize.minimize(bucklingK, x0=[1], args=[L, R, t, Poisson]) #optimises half_waves for minimal buckling_k
     buckling_k = buckling_k_op.fun #takes the optimal value of buckling_k
-    zstress = P / (2 * math.pi * R * t)
-    if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress and HoopStress(p, R, t) < SigmaY:
-        # print(2*math.pi*R*L*t, shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) - zstress, eulerBuckling(I, E, A, L) - zstress, SigmaY - HoopStress(p, R, t))
-        return 2*math.pi*R*L*t # if the geometry works, it outputs the volume (not volume enclosed, but volume of the structure)
-    else:
-        return 5000 # otherwise it outputs an arbitrary large value
+
+    # if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress and HoopStress(p, R, t) < SigmaY:
+    #     # print(2*math.pi*R*L*t, shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) - zstress, eulerBuckling(I, E, A, L) - zstress, SigmaY - HoopStress(p, R, t))
+    #     return 2*math.pi*R*L*t # if the geometry works, it outputs the volume (not volume enclosed, but volume of the structure)
+    # else:
+    #     return 5000 # otherwise it outputs an arbitrary large value
+    return 2 * math.pi * R * L * t
 
 
 #5.4----------------------------------------------------------------------------
