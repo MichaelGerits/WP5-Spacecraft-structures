@@ -19,7 +19,7 @@ from coordinate_conversion import cylindrical_to_cartesian
 The original Buckling calculations are done assuming that the mass excluding the structural mass is added
 """
 #optimising for buckling (its scuffed)
-Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R, structuralCylinder.half_waves], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h], bounds=optimize.Bounds([0.001, 0.001, 0.001], [0.1, 1, 100]))
+Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R, structuralCylinder.half_waves], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h])
 print(Resulto_Buck) #prints the results of the optimiser
 structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun #the function output volume, so the mass is the output(.fun) times density
 
