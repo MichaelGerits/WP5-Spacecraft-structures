@@ -23,6 +23,7 @@ while massdiff >= 1:
     """
 
     P = acceleration * Mass[(importantIndex -1) % 2]
+    print("P=", P)
 
     #allocates the initial lists
     #----------------------------------------------------------------------------------------------------------------------------------
@@ -70,7 +71,7 @@ while massdiff >= 1:
     """
 
     #optimising for buckling (its scuffed)
-    Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h, P], bounds=optimize.Bounds([preliminary_thickness, 0.001], [0.1, 0.28]))
+    Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h, P[1]], bounds=optimize.Bounds([preliminary_thickness, 0.001], [0.1, 0.28]))
     print(Resulto_Buck) #prints the results of the optimiser
     structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun #the function output volume, so the mass is the output(.fun) times density
     # updates structuralCylinder with the values given by the optimiser

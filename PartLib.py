@@ -39,10 +39,10 @@ class TransversePanel:
         self.rho_core = rho_core
         self.R_struct = R_struct
         self.holes = [{"r": self.R_struct}] + holes #list of dicts (as to ad positions later if needed)
-        self.panelarea =self.panelCalcArea()
-        self.panelmass = self.panelCalcMass()
+        self.area =self.calcArea()
+        self.mass = self.calcMass()
 
-    def panelCalcArea(self):
+    def calcArea(self):
         """
         calculates the true area of the plate
         """
@@ -51,11 +51,11 @@ class TransversePanel:
             area -= np.pi*hole["r"]**2
         self.area = area
         return area
-    def panelCalcMass(self):
+    def calcMass(self):
         """
         calculates the mass of the panel
         """
-        mass = 2*(self.panelCalcArea()*self.t_face*self.rho_face) + self.panelCalcArea()*self.t_core*self.rho_core
+        mass = 2*(self.calcArea()*self.t_face*self.rho_face) + self.calcArea()*self.t_core*self.rho_core
         self.mass = mass
         return mass
 #---------------------------------------------------------------------------------------------------------------------------------
