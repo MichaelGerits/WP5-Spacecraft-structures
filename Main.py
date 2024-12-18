@@ -65,7 +65,7 @@ def Buck(arr, fixed): #optimises the structural cylinder
         # print(2*math.pi*R*L*t, shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) - zstress, eulerBuckling(I, E, A, L) - zstress, SigmaY - HoopStress(p, R, t))
         return 2*math.pi*R*L*t # if the geometry works, it outputs the volume (not volume enclosed, but volume of the structure)
     else:
-        return 50000000000000 # otherwise it outputs an arbitrary large value
+        return 5000 # otherwise it outputs an arbitrary large value
 
 
 #5.4----------------------------------------------------------------------------
