@@ -75,5 +75,6 @@ while massdiff >= 1:
     print(f"t = {structuralCylinder.t} m, h = {structuralCylinder.h} m, R = {structuralCylinder.R} m")
 
     massdiff = structuralCylinder.mass #TODO: add all the mass that is added in the itteration
+    break #break to test
 
 
