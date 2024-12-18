@@ -103,6 +103,12 @@ class Attachment:
         self.fastAmount1 = fastAmount1 #amount of fasteners on the plate
         self.fastAmount2 = fastAmount2 #amount of fasteners on the cylinder
         self.fastDiameter = 0.005
+
+        self.t=t
+        self.SigmaY = SigmaY
+        self.SigmaB = SigmaB
+        self.zload = zload
+
         self.w = self.fastDiameter * (2 * 2 + 2.5)
         e1 = self.fastDiameter*2
         e2 = self.fastDiameter*2

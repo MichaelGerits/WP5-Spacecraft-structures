@@ -60,6 +60,7 @@ while massdiff >= 1:
     Panel1Mass = 118.21 + (1085/2) +  att_and_panelMass/2 #mass on the first transverse panel
     Panel2Mass = 104.3 + (1085/2) + att_and_panelMass/2 #mass on the second transverse panel
 
+    #finds the highest loaded attachments and itterates the size of the attachments with it
     attHighest = Main.FindHighestLoadAttch(Attachmentslower+Attachmentsupper+Attachmentsprop)
     Main.ItterateAttach(attHighest, Attachmentsprop+Attachmentslower+Attachmentsupper)
 
