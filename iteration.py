@@ -20,7 +20,7 @@ while massdiff >= 1:
     #allocates the initial lists
     #----------------------------------------------------------------------------------------------------------------------------------
     closePanelList = [PartLib.ClosingPanel(w=1, h=1.5)] * PartLib.closingpanelAmount
-    transversePanelList = [PartLib.TransversePanel(), PartLib.TransversePanel([{"r": 0.2682}]*4)] + [PartLib.TransversePanel(R_struct=0)] #2transverse panels + 1 closing panels
+    transversePanelList = [PartLib.TransversePanel(), PartLib.TransversePanel(holes=[{"r": 0.2682}]*4)] + [PartLib.TransversePanel(R_struct=0)] #2transverse panels + 1 closing panels
     Attachmentsupper = [] #initialise list
     Attachmentslower = [] #initialise list
     Attachmentsprop = [] #initialise list
