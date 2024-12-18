@@ -24,12 +24,13 @@ while massdiff >= 1:
         Attachments.append(PartLib.Attachment(pos=np.array([structuralCylinder.R, angles[i], PartLib.transversePanelHeight]))) #upper plate
     #-----------------------------------------------------------------------------------------------------------------------------------
 
-    #TODO: subtract the holes due to the fueltanks
-    #TODO: specify which attachments carry which loads
+    #TODO: update attchment objzct to include geometry
     #TODO: get load fraction
+    #TODO: specify which attachments carry which loads
     #TODO: calculate highest mass bracket
     #TODO: update attchment objzct to include geometry
     #TODO: calc bearing and pullthrough ->new mass
+    #TODO: subtract the holes due to the fueltanks
 
     """
     Here the forces on the transverse panels are calculated and then these are added to the load P 
@@ -71,5 +72,5 @@ while massdiff >= 1:
     print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
 
     massdiff = structuralCylinder.mass #TODO: add all the mass that is added in the itteration
-    break
+
 

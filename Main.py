@@ -63,6 +63,11 @@ def Buck(arr, fixed): #optimises the structural cylinder
         return 500000 # otherwise it outputs an arbitrary large value
 
 
+def HoopStress(pressure, radius, thickness):
+    stress = (pressure * radius)/thickness
+    return stress
+
+
 #5.4----------------------------------------------------------------------------
 def CalcMass(panels, attach):
     panelMass = 0
