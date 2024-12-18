@@ -12,7 +12,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=1, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, critical_euler_stress=0, critical_shell_stress=0, Poisson=0.32, buckling_k=0, half_waves=0, mass=0):
+    def __init__(self, R=1, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, Poisson=0.32, buckling_k=0, half_waves=0, mass=0):
         self.R = R
         self.h = h
         self.t = t
@@ -20,8 +20,6 @@ class StructuralCylinder:
         self.SigmaY = SigmaY
         self.rho=rho
         self.Poisson = Poisson
-        self.critical_euler_stress = critical_euler_stress
-        self.critical_shell_stress = critical_shell_stress
         self.mass = mass
         self.buckling_k = buckling_k
         self.half_waves = half_waves
