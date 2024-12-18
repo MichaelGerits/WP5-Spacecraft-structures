@@ -57,7 +57,7 @@ def Buck(arr, fixed): #optimises the structural cylinder
     buckling_k_op = optimize.minimize(bucklingK, x0=[1], args=[L, R, t, Poisson]) #optimises half_waves for minimal buckling_k
     buckling_k = buckling_k_op.fun #takes the optimal value of buckling_k
     zstress = P / (2 * math.pi * R * t)
-    if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress:
+    if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress and HoopStress(p, R, t) < SigmaY:
         return 2*math.pi*R*L*t # if the geometry works, it outputs the volume (not volume enclosed, but volume of the structure)
     else:
         return 500000 # otherwise it outputs an arbitrary large value
