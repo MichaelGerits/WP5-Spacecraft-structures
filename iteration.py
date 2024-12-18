@@ -35,7 +35,7 @@ while massdiff >= 1:
     angles = np.linspace(0,360,num=PartLib.AttachmentPerPlate) #equally space the attachments
 
     #get the load fraction to guess initial weight of hinges
-    frac = np.linalg.norm(Loads.P)/np.linalg.norm(np.array([538.6, 538.6, 1795]))
+    frac = np.linalg.norm(P)/np.linalg.norm(np.array([538.6, 538.6, 1795]))
 
     #attachments to the propellant tanks
     Attachmentsprop = [PartLib.Attachment()] * 12
@@ -68,14 +68,6 @@ while massdiff >= 1:
     """
     here the structural cylinder is sized and its mass will also be added to the next iteration
     """
-
-    # Main.hoopStress(structuralCylinder) #gets the thickness by pressure calculation
-    #
-    # if Main.eulerBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
-    #     print("Fail by Euler Buckling")
-    #
-    # if Main.shellBuckling(structuralCylinder) < Loads.P[2]/structuralCylinder.calcArea():
-    #     print("Fail by Shell Buckling")
 
     #optimising for buckling (its scuffed)
     Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h, P], bounds=optimize.Bounds([preliminary_thickness, 0.001], [0.1, 0.28]))

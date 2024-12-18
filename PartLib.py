@@ -30,7 +30,7 @@ class TransversePanel:
     """
     holds the geometry and properties of the transverse panels
     """
-    def __init__(self, R_outer=1, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0.28, holes=[]):
+    def __init__(self, R_outer=1.00, t_face=0.19805e-3, t_core=15e-3, rho_face=1611, rho_core=48.2, R_struct=0.28, holes=[]):
         self.R_outer = R_outer
         self.sideLength = R_outer
         self.t_face = t_face
@@ -39,23 +39,23 @@ class TransversePanel:
         self.rho_core = rho_core
         self.R_struct = R_struct
         self.holes = [{"r": self.R_struct}] + holes #list of dicts (as to ad positions later if needed)
-        self.area =self.calcArea()
-        self.mass = self.calcMass()
+        self.panelarea =self.panelCalcArea()
+        self.panelmass = self.panelCalcMass()
 
-    def calcArea(self):
+    def panelCalcArea(self):
         """
         calculates the true area of the plate
         """
-        area = (3 * np.sqrt(3))/2 * self.sideLength**2 #area of a hexagon
+        area = (3 * np.sqrt(3))/2 * self.R_outer**2 #area of a hexagon
         for hole in self.holes:
             area -= np.pi*hole["r"]**2
         self.area = area
         return area
-    def calcMass(self):
+    def panelCalcMass(self):
         """
         calculates the mass of the panel
         """
-        mass = 2*(self.calcArea()*self.t_face*self.rho_face) + self.calcArea()*self.t_core*self.rho_core
+        mass = 2*(self.panelCalcArea()*self.t_face*self.rho_face) + self.panelCalcArea()*self.t_core*self.rho_core
         self.mass = mass
         return mass
 #---------------------------------------------------------------------------------------------------------------------------------
