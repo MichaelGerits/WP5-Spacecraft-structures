@@ -7,11 +7,9 @@ import math
 from scipy import optimize
 from coordinate_conversion import cylindrical_to_cartesian
 
-preliminary_thickness = 0.000001
+
 preliminary_radius = 0.28
-while Main.HoopStress(Loads.p, preliminary_radius, preliminary_thickness) >= structuralCylinder.SigmaY:
-    preliminary_thickness += 0.000001
-preliminary_thickness = round(preliminary_thickness, 5)
+preliminary_thickness = round((Loads.p * preliminary_radius)/structuralCylinder.SigmaY, 6)
 
 massdiff = 10
 while massdiff >= 1:
