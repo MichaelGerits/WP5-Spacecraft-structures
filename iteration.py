@@ -16,7 +16,7 @@ acceleration = Loads.acceleration
 importantIndex = 0
 massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex-1) % 2])
 
-while massdiff >= 1:
+while massdiff >= 0.001:
     print(Mass)
     """
     The original Buckling calculations are done assuming that the mass excluding the structural mass is added
@@ -58,7 +58,7 @@ while massdiff >= 1:
 
     att_and_panelMass = Main.CalcMass(closePanelList+transversePanelList, Attachmentsupper+Attachmentslower+Attachmentsprop) #calculates th 
 
-    Panel1Mass = 118.21 + (1085/2) +  att_and_panelMass/2 #mass on the first transverse panel
+    Panel1Mass = 118.21 + (1085/2) + att_and_panelMass/2 #mass on the first transverse panel
     Panel2Mass = 104.3 + (1085/2) + att_and_panelMass/2 #mass on the second transverse panel
 
     #finds the highest loaded attachments and itterates the size of the attachments with it
@@ -79,7 +79,7 @@ while massdiff >= 1:
     structuralCylinder.t = Resulto_Buck.x[0]
     structuralCylinder.R = Resulto_Buck.x[1]
     #final check just to make sure
-    print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
+    print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m, mass = {structuralCylinder.mass}", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
 
     Mass[importantIndex % 2] = Loads.initialTotalMass + structuralCylinder.mass + Panel1Mass + Panel2Mass#TODO: add all the mass that is added in the itteration
     massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex - 1) % 2])
