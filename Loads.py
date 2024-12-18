@@ -14,6 +14,7 @@ initialTotalMass = 129.1 #mass not including what is attached to the
 totalMass = initialTotalMass
 A = np.array([1.8*9.81,1.8*9.81,6*9.81])
 P = A * totalMass #resulting force [Px, Py, Pz]
+print(P)
 #resulting Moment [Mx, My, Mz]
 T = [430, 0, 129] #Nm
 
