@@ -36,6 +36,10 @@ def shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k):
     critical_shell_stress = coefficient * buckling_k * ratio1 * ratio2
     return critical_shell_stress
 
+def HoopStress(pressure, radius, thickness):
+    stress = (pressure * radius)/thickness
+    return stress
+
 def Buck(arr, fixed): #optimises the structural cylinder
 
     #fixed material properties, not optimised
@@ -58,14 +62,10 @@ def Buck(arr, fixed): #optimises the structural cylinder
     buckling_k = buckling_k_op.fun #takes the optimal value of buckling_k
     zstress = P / (2 * math.pi * R * t)
     if shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) > zstress and eulerBuckling(I, E, A, L) > zstress and HoopStress(p, R, t) < SigmaY:
+        # print(2*math.pi*R*L*t, shellBuckling(E, Poisson, t, L, buckling_Q, buckling_k) - zstress, eulerBuckling(I, E, A, L) - zstress, SigmaY - HoopStress(p, R, t))
         return 2*math.pi*R*L*t # if the geometry works, it outputs the volume (not volume enclosed, but volume of the structure)
     else:
         return 500000 # otherwise it outputs an arbitrary large value
-
-
-def HoopStress(pressure, radius, thickness):
-    stress = (pressure * radius)/thickness
-    return stress
 
 
 #5.4----------------------------------------------------------------------------
