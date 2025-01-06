@@ -133,4 +133,5 @@ def ItterateAttach(att,attachements):
         for i in attachements:
             i.t += 0.0005
         checkResult= att.CheckPullThrough()
+        print(att.t)
     print("passed pullthrough", attachements[0].t)
