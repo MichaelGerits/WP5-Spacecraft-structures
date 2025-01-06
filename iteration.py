@@ -13,7 +13,7 @@ preliminary_thickness = round((Loads.p * preliminary_radius)/structuralCylinder.
 
 Mass = [0, Loads.initialTotalMass]
 acceleration = Loads.acceleration
-importantIndex = 0
+importantIndex = 0  # KEEP TRACK OF WHICH ITERATION WE ARE AT
 massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex-1) % 2])
 
 #allocates the initial lists
@@ -72,12 +72,12 @@ while massdiff >= 0.001:
     """
 
     #optimising for buckling (its scuffed)
-    Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t, structuralCylinder.R], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h, P[1]], bounds=optimize.Bounds([Main.constrainer(structuralCylinder, P[1]), 0.001], [0.1, 0.28]))
+    Resulto_Buck = optimize.minimize(Main.Buck, [structuralCylinder.t], args=[structuralCylinder.E, structuralCylinder.Poisson, structuralCylinder.SigmaY, structuralCylinder.h, P[1], structuralCylinder.R], bounds=optimize.Bounds([Main.constrainer(structuralCylinder, P[1])], [0.1]))
     print(Resulto_Buck) #prints the results of the optimiser
     structuralCylinder.mass = structuralCylinder.rho * Resulto_Buck.fun #the function output volume, so the mass is the output(.fun) times density
     # updates structuralCylinder with the values given by the optimiser
     structuralCylinder.t = Resulto_Buck.x[0]
-    structuralCylinder.R = Resulto_Buck.x[1]
+    # structuralCylinder.R = Resulto_Buck.x[1]
     #final check just to make sure
     print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m, mass = {structuralCylinder.mass}", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
 

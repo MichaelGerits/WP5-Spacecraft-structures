@@ -42,6 +42,7 @@ def HoopStress(pressure, radius, thickness):
 
 def constrainer(cyl, P):
     listo = [P*0.28/cyl.SigmaY, (math.sqrt(2) * P * 1.5) / (2 * (math.pi)**2 * math.sqrt(cyl.E))]
+    print("losto", listo)
     return max(listo)
 
 def Buck(arr, fixed): #optimises the structural cylinder
@@ -56,7 +57,7 @@ def Buck(arr, fixed): #optimises the structural cylinder
 
     # Geometric properties, will be optimised
     t = arr[0]
-    R = arr[1]
+    R = fixed[5]
 
     #Some more (geometric) properties
     I = math.pi * (R ** 3) * t
