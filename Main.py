@@ -118,6 +118,7 @@ def ItterateAttach(att,attachements):
     updates the geometry of the attachments
     "att" is the highest loaded attachement
     """
+    t=attachements[0].t
     #bearing check
     checkResult = att.CheckBearing(cyl)
     while 0 in checkResult:
@@ -126,12 +127,14 @@ def ItterateAttach(att,attachements):
             i.t += updateVal[0]
         cyl.t += updateVal[1]
         checkResult = att.CheckBearing(cyl)
-    print("Passed bearing", attachements[0].t)
+    print("Passed bearing", t)
     #pullthrough check
     checkResult = att.CheckPullThrough()
     while 0 in checkResult:
+        t+=0.0005
         for i in attachements:
             i.t += 0.0005
         checkResult= att.CheckPullThrough()
         print(att.t, att.zload)
-    print("passed pullthrough", attachements[0].t)
+    print("passed pullthrough", t)
+    return t

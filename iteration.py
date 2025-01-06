@@ -30,6 +30,7 @@ angles = np.linspace(0,360,num=PartLib.AttachmentPerPlate) #equally space the at
 Attachmentsprop = [PartLib.Attachment()] * 12 #12 brackets on the top panel (carry half the load)
 
 while massdiff >= 0.001:
+    print("\n#############################################iteration general######################################\n")
     print(Mass)
     """
     The original Buckling calculations are done assuming that the mass excluding the structural mass is added
@@ -66,8 +67,9 @@ while massdiff >= 0.001:
         attach.zload = Zload
     #finds the highest loaded attachments and itterates the size of the attachments with it
     attHighest = Main.FindHighestLoadAttch(Attachmentslower+Attachmentsupper+Attachmentsprop)
-    Main.ItterateAttach(attHighest, Attachmentsprop+Attachmentslower+Attachmentsupper)
-
+    t=Main.ItterateAttach(attHighest, Attachmentsprop+Attachmentslower+Attachmentsupper)
+    for attach in Attachmentsprop+Attachmentslower+Attachmentsupper:
+            attach.t=t
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     """
@@ -97,4 +99,4 @@ pprint(vars(transversePanelList[1]))
 print("------------------------------transverseclose-------------------------")
 pprint(vars(transversePanelList[2]))
 print("------------------------------attach-------------------------")
-pprint(vars(Attachmentsupper[0]))
+pprint(vars((Attachmentsprop+Attachmentslower+Attachmentsupper)[0]))
