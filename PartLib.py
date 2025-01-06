@@ -142,10 +142,10 @@ class Attachment:
         for i in range(2):   #iterate through all fastener objects
             areabolthead = (0.008/2)**2 * math.pi - (0.005/2)**2 * math.pi    #calculate area on which compressive stress acts
             sigmay = self.zload/(areabolthead * 4)      #calculate compressive stress
-            areat2 = math.pi * 0.008 * self.t   #calculate areas over which the shear stress will act
-            #areat3 = math.pi * 0.008 * (15e-3+2*0.19805e-3)
+            areat2 = 2 * math.pi * 0.008 * self.t   #calculate areas over which the shear stress will act
+            #areat3 = 2* math.pi * 0.008 * (15e-3+2*0.19805e-3)
             areat3 = 10e9
-            tau2 = self.zload/areat2      #calculate shear stresses
+            tau2 = self.zload/(areat2 *4)     #calculate shear stresses
             #tau3 = self.zload/areat3
             tau3 = 0
             if areat2 <= areat3:   #calculate von mises stress for greater shear stress
