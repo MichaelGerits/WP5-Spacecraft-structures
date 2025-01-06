@@ -13,7 +13,7 @@ preliminary_thickness = round((Loads.p * preliminary_radius)/structuralCylinder.
 
 Mass = [0, Loads.initialTotalMass]
 acceleration = Loads.acceleration
-importantIndex = 0
+importantIndex = 0  # KEEP TRACK OF WHICH ITERATION WE ARE AT
 massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex-1) % 2])
 
 while massdiff >= 0.001:
