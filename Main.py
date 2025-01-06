@@ -93,8 +93,8 @@ def CalcPanelLoads(mass1, mass2):
     return loads
 def CalcAttachForces(mass1, mass2):
     load1, load2 = CalcPanelLoads(mass1, mass2)
-    att1Load = load1/6
-    att2Load = load2/6
+    att1Load = load1/(PartLib.AttachmentPerPlate)
+    att2Load = load2/(PartLib.AttachmentPerPlate)
     fuelLoad = 1085/(4*3*2)
 
     return max(att1Load, att2Load, fuelLoad)
@@ -121,7 +121,7 @@ def ItterateAttach(att,attachements):
     #bearing check
     checkResult = att.CheckBearing(cyl)
     while 0 in checkResult:
-        updateVal = np.abs(np.array(checkResult) - 1) * 0.001
+        updateVal = np.abs(np.array(checkResult) - 1) * 0.0005
         for i in attachements:
             i.t += updateVal[0]
         cyl.t += updateVal[1]
@@ -131,7 +131,7 @@ def ItterateAttach(att,attachements):
     checkResult = att.CheckPullThrough()
     while 0 in checkResult:
         for i in attachements:
-            i.t += 0.005
+            i.t += 0.0005
         checkResult= att.CheckPullThrough()
         print(att.t, att.zload)
     print("passed pullthrough", attachements[0].t)

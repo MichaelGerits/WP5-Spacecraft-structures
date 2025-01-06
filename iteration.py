@@ -89,6 +89,12 @@ while massdiff >= 0.001:
     importantIndex +=1
     print(Mass, "Hi")
 
+print("--------------------------closing-------------------------------")
 pprint(vars(closePanelList[0]))
+print("----------------------------transverse----------------------------")
 pprint(vars(transversePanelList[0]))
+pprint(vars(transversePanelList[1]))
+print("------------------------------transverseclose-------------------------")
 pprint(vars(transversePanelList[2]))
+print("------------------------------attach-------------------------")
+pprint(vars(Attachmentsupper[0]))
