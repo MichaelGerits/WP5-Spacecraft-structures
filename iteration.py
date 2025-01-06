@@ -61,7 +61,7 @@ while massdiff >= 0.001:
     Panel2Mass = 104.3 + (1085/2) + att_and_panelMass/2 #mass on the second transverse panel
 
     Zload = Main.CalcAttachForces(Panel1Mass, Panel2Mass)
-    for attach in [Attachmentsprop+Attachmentslower+Attachmentsupper]:
+    for attach in Attachmentsprop+Attachmentslower+Attachmentsupper:
         attach.zload = Zload
     #finds the highest loaded attachments and itterates the size of the attachments with it
     attHighest = Main.FindHighestLoadAttch(Attachmentslower+Attachmentsupper+Attachmentsprop)
