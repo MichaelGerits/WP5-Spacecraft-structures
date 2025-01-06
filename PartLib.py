@@ -12,7 +12,7 @@ class StructuralCylinder:
     """
     holds geometry and properties of the structural cylinder
     """
-    def __init__(self, R=1, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, Poisson=0.32, buckling_k=0, half_waves=0, mass=0):
+    def __init__(self, R=0.28, h=1.5, t=0, E=110.3e9, SigmaY=980e6, rho=4540, Poisson=0.32, buckling_k=0, half_waves=0, mass=0):
         self.R = R
         self.h = h
         self.t = t

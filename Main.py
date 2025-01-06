@@ -57,7 +57,7 @@ def Buck(arr, fixed): #optimises the structural cylinder
 
     # Geometric properties, will be optimised
     t = arr[0]
-    R = arr[1]
+    R = fixed[5]
 
     #Some more (geometric) properties
     I = math.pi * (R ** 3) * t
