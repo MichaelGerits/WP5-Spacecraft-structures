@@ -6,6 +6,7 @@ import Loads
 import math
 from scipy import optimize
 from coordinate_conversion import cylindrical_to_cartesian
+from pprint import pprint
 
 
 preliminary_radius = 0.28
@@ -88,3 +89,6 @@ while massdiff >= 0.001:
     importantIndex +=1
     print(Mass, "Hi")
 
+pprint(vars(closePanelList[0]))
+pprint(vars(transversePanelList[0]))
+pprint(vars(transversePanelList[2]))
