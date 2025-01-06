@@ -126,11 +126,11 @@ def ItterateAttach(att,attachements):
             i.t += updateVal[0]
         cyl.t += updateVal[1]
         checkResult = att.CheckBearing(cyl)
-
+    print("Passed bearing", attachements[0].t)
     #pullthrough check
     checkResult = att.CheckPullThrough()
     while 0 in checkResult:
         for i in attachements:
             i.t += 0.5
         checkResult= att.CheckPullThrough()
-
+    print("passed pullthrough", attachements[0].t)
