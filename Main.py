@@ -131,6 +131,6 @@ def ItterateAttach(att,attachements):
     checkResult = att.CheckPullThrough()
     while 0 in checkResult:
         for i in attachements:
-            i.t += 0.0005
+            i.t += 0.5
         checkResult= att.CheckPullThrough()
 
