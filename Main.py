@@ -51,13 +51,13 @@ def Buck(arr, fixed): #optimises the structural cylinder
     E = fixed[0]
     Poisson = fixed[1]
     SigmaY = fixed[2]
-    P = fixed[4]
     L = fixed[3]
+    P = fixed[4]
+    R = fixed[5]
     p = Loads.p
 
     # Geometric properties, will be optimised
     t = arr[0]
-    R = fixed[5]
 
     #Some more (geometric) properties
     I = math.pi * (R ** 3) * t
@@ -131,7 +131,7 @@ def ItterateAttach(att,attachements):
     checkResult = att.CheckPullThrough()
     while 0 in checkResult:
         for i in attachements:
-            i.t += 0.0005
+            i.t += 0.5
         checkResult= att.CheckPullThrough()
         print(att.t)
     print("passed pullthrough", attachements[0].t)

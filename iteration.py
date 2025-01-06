@@ -82,7 +82,7 @@ while massdiff >= 0.001:
     structuralCylinder.t = Resulto_Buck.x[0]
     # structuralCylinder.R = Resulto_Buck.x[1]
     #final check just to make sure
-    print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m, mass = {structuralCylinder.mass}", 2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t, "m^3")
+    print(f"t = {structuralCylinder.t} m, R = {structuralCylinder.R} m, mass = {structuralCylinder.mass} kg, V = {2*math.pi*structuralCylinder.R*1.5*structuralCylinder.t} m^3")
 
     Mass[importantIndex % 2] = Loads.initialTotalMass + structuralCylinder.mass + Panel1Mass + Panel2Mass #TODO: add all the mass that is added in the itteration
     massdiff = abs(Mass[importantIndex % 2] - Mass[(importantIndex - 1) % 2])
