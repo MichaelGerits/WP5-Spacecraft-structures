@@ -93,8 +93,8 @@ def CalcPanelLoads(mass1, mass2):
     return loads
 def CalcAttachForces(mass1, mass2):
     load1, load2 = CalcPanelLoads(mass1, mass2)
-    att1Load = load1/Loads.AttachmentPerPlate
-    att2Load = load2/Loads.AttachmentPerPlate
+    att1Load = load1/6
+    att2Load = load2/6
     fuelLoad = 1085/(4*3*2)
 
     return max(att1Load, att2Load, fuelLoad)
