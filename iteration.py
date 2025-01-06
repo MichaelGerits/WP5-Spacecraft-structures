@@ -86,4 +86,3 @@ while massdiff >= 0.001:
     importantIndex +=1
     print(Mass, "Hi")
 
-

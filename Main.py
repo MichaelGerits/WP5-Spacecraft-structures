@@ -82,7 +82,7 @@ def CalcMass(panels, attach):
 
     attachMass = 0
     for att in attach:
-        attachMass += att.calcMass()
+        attachMass += att.CalcMass()
 
     return panelMass + attachMass
 
