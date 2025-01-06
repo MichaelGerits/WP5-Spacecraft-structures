@@ -82,20 +82,22 @@ def CalcMass(panels, attach):
 
     attachMass = 0
     for att in attach:
-        attachMass += att.mass
+        attachMass += att.CalcMass()
 
     return panelMass + attachMass
 
 #5.5-----------------------------------------------------------------------------------
-def CalcPanelLoads(initMass):
-    A = Loads.A
-    #TODO:need to define which masses act where
-    #TODO: divide that load over the attachements
-    return (P1, P2)
-def CalcAttachForces(P):
-    #TODO: size the attachments on they're independent loads
-    return AttPList
-    #TODO: divide over the fasteners
+def CalcPanelLoads(mass1, mass2):
+    acc = Loads.acceleration[2]
+    loads = [acc*mass1, acc*mass2]
+    return loads
+def CalcAttachForces(mass1, mass2):
+    load1, load2 = CalcPanelLoads(mass1, mass2)
+    att1Load = load1/Loads.AttachmentPerPlate
+    att2Load = load2/Loads.AttachmentPerPlate
+    fuelLoad = 1085/(4*3*2)
+
+    return max(att1Load, att2Load, fuelLoad)
 
 
 def FindHighestLoadAttch(attachments):
